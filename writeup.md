@@ -17,9 +17,9 @@ My pipeline consisted of the following steps:
 5. Then we will use the Hough transformation to obtain the coordinates of line segments in the masked image. These coordinates will be used to approximate the equation of lane lines.
 6. These lines were extrapolated to form a complete line segment in draw_lines function.
 
-![Pipeline Steps][/test_images_output/pipeline.png]
+![Pipeline Steps](/test_images_output/pipeline.png)
 
-![Test Images Output][/test_images_output/side_by_side.png]
+![Test Images Output](/test_images_output/side_by_side.png)
 
 ### 2. Identify potential shortcomings with your current pipeline
 
