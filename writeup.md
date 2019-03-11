@@ -1,46 +1,33 @@
-# **Finding Lane Lines on the Road** 
-
-## Writeup
-
-**Finding Lane Lines on the Road**
+# **Finding Lane Lines on the Road**
 
 The goals / steps of this project are the following:
 * Make a pipeline that finds lane lines on the road
 * Reflect on your work in a written report
 
----
-
-### Reflection
+## Reflection
 
 ### 1. Pipeline Description
 
 My pipeline consisted of the following steps:
 
-1. Convert the images to grayscale to directly work with pixel intensities (instead of 3 different colors)
-2. In order to reduce abrupt changes in consecutive pixels, smoothen the image by using gaussian noise filter
-3. Apply Canny edge detection on this smooth grayscale image.
-4. The image obtained from above step will clearly lane lines standing out. However it will also contain other edges, so we will mask the image to obtain only the region containing lane lines.
-5. Then we will use the Hough transformation to obtain the coordinates of line segments in the masked image. This coordinates will be used to approximate the equation of lane lines. The approximation was done in draw_lines() function function.
+1. Convert the images to grayscale first.
+2. Smoothen the image by using gaussian noise filter
+3. Apply Canny edge detection on this smooth grayscale image to detect edges on the basis of the difference in pixel intensities.
+4. The image obtained from above step will clearly have lane lines standing out. However it will also contain other edges, so we will mask the image to obtain only the region containing lane lines.
+5. Then we will use the Hough transformation to obtain the coordinates of line segments in the masked image. These coordinates will be used to approximate the equation of lane lines.
+6. These lines were extrapolated to form a complete line segment in draw_lines function.
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+![Pipeline Steps][/test_images_output/pipeline.png]
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
-
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
-
-![alt text][image1]
-
+![Test Images Output][/test_images_output/side_by_side.png]
 
 ### 2. Identify potential shortcomings with your current pipeline
 
-
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
-
+Following shortcomings are possible in the current pipeline:
+- When the lines become too curvy
+- When there is much shadow in the scene
+- When the color of the lines is fading
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
-
-Another potential improvement could be to ...
+A possible improvement would be to store previous slopes as global variables and check if current slope varies much from the previous slope, then use previous slope only. And if there is no line detected (either left or right), then use the previous line only to remove flickering.
